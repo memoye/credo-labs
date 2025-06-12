@@ -10,12 +10,40 @@ import { peerDependencies } from "./package.json";
 export default defineConfig({
   plugins: [
     react(),
-    svgr(),
+    svgr({
+      svgrOptions: {
+        exportType: "default",
+        ref: true,
+        svgo: false,
+        titleProp: true,
+        plugins: ["@svgr/plugin-jsx"],
+        template: (variables, { tpl }) => {
+          return tpl`
+            "use client";
+            ${variables.imports};
+            ${variables.interfaces};
+            const ${variables.componentName} = (${variables.props}) => (
+              ${variables.jsx}
+            );
+            ${variables.exports};
+          `;
+        },
+      },
+      include: "**/*.svg",
+    }),
     tailwindcss(),
     dts({
-      // entryRoot: "src",
-      // rollupTypes: true,
-      exclude: ["src/**/*.test.*", "src/**/*.stories.*"],
+      entryRoot: "src",
+      rollupTypes: true,
+      exclude: ["src/**/*.test.*", "src/**/*.stories.*", "**/*.svg"],
+      beforeWriteFile: (filePath, content) => {
+        if (filePath.includes("icons")) {
+          return {
+            filePath,
+            content: content.replace(/\.svg/g, ""),
+          };
+        }
+      },
     }),
   ],
   resolve: {
@@ -28,15 +56,10 @@ export default defineConfig({
     lib: {
       entry: {
         index: path.resolve(__dirname, "src/index.ts"),
-        styles: path.resolve(__dirname, "src/styles/tailwind.css"),
-        "ui/button/index": path.resolve(
-          __dirname,
-          "src/components/button/index.ts"
-        ),
-        "ui/icons/index": path.resolve(
-          __dirname,
-          "src/components/icons/index.ts"
-        ),
+        "styles/entry": path.resolve(__dirname, "src/styles/tailwind.css"),
+        "styles/palette": path.resolve(__dirname, "src/styles/palette.css"),
+        "ui/button/index": path.resolve(__dirname, "src/ui/button/index.ts"),
+        "ui/icons/index": path.resolve(__dirname, "src/ui/icons/index.ts"),
         "utils/index": path.resolve(__dirname, "src/utils/index.ts"),
       },
       formats: ["es"],

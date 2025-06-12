@@ -1,7 +1,7 @@
 # Credo Labs
 
 [![License](https://img.shields.io/badge/license-ISC-blue.svg)](LICENSE)
-[![pnpm](https://img.shields.io/badge/maintained%20with-npm-d50000.svg)](https://npm.org/)
+[![pnpm](https://img.shields.io/badge/maintained%20with-npm-d50000.svg)](https://www.npmjs.com/package/@credo-labs/react)
 
 A collection of UI components, utilities and styles for Credo React Apps
 

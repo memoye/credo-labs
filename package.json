@@ -1,6 +1,6 @@
 {
   "name": "@credo-labs/react",
-  "version": "0.0.0",
+  "version": "0.0.0-alpha.1",
   "description": "UI components and utilities for Credo apps built with react",
   "homepage": "https://github.com/memoye/credo-labs#readme",
   "bugs": {
@@ -22,8 +22,11 @@
       "types": "./dist/components/*/index.d.ts",
       "import": "./dist/ui/*/index.js"
     },
-    "./styles.css": {
-      "import": "./dist/styles.css"
+    "./styles/entry.css": {
+      "import": "./dist/styles/entry.css"
+    },
+    "./styles/palette.css": {
+      "import": "./dist/styles/palette.css"
     },
     "./utils": {
       "types": "./dist/utils/index.d.ts",
@@ -33,26 +36,49 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "css",
-    "dist"
+    "dist",
+    "src/assets/fonts"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "tailwind",
+    "typescript",
+    "design-system",
+    "credo",
+    "credocentral"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "prepublishOnly": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "1.2.3",
     "@tailwindcss/vite": "^4.1.10",
     "class-variance-authority": "0.7.1",
     "clsx": "^2.1.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^4.1.10",
-    "@radix-ui/react-slot": "1.2.3"
+    "tailwindcss": "^4.1.10"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.0",
@@ -61,6 +87,7 @@
     "@storybook/addon-docs": "^9.0.8",
     "@storybook/addon-vitest": "^9.0.8",
     "@storybook/react-vite": "^9.0.8",
+    "@svgr/plugin-jsx": "^8.1.0",
     "@types/node": "^24.0.1",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
