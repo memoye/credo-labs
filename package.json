@@ -1,7 +1,6 @@
 {
   "name": "@credo-labs/react",
   "version": "0.0.0",
-  "private": true,
   "description": "UI components and utilities for Credo apps built with react",
   "homepage": "https://github.com/memoye/credo-labs#readme",
   "bugs": {
@@ -12,7 +11,7 @@
     "url": "git+https://github.com/memoye/credo-labs.git"
   },
   "license": "ISC",
-  "author": "Memoye",
+  "author": "Brown Memoye",
   "type": "module",
   "exports": {
     ".": {
