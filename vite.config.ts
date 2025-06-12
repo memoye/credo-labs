@@ -56,8 +56,8 @@ export default defineConfig({
     lib: {
       entry: {
         index: path.resolve(__dirname, "src/index.ts"),
-        "styles/entry": path.resolve(__dirname, "src/styles/tailwind.css"),
-        "styles/palette": path.resolve(__dirname, "src/styles/palette.css"),
+        "styles/entry.css": path.resolve(__dirname, "src/styles/tailwind.css"),
+        "styles/palette.css": path.resolve(__dirname, "src/styles/palette.css"),
         "ui/button/index": path.resolve(__dirname, "src/ui/button/index.ts"),
         "ui/icons/index": path.resolve(__dirname, "src/ui/icons/index.ts"),
         "utils/index": path.resolve(__dirname, "src/utils/index.ts"),

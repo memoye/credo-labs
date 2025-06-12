@@ -1,6 +1,6 @@
 {
   "name": "@credo-labs/react",
-  "version": "0.0.0-alpha.1",
+  "version": "0.0.0-alpha.3",
   "description": "UI components and utilities for Credo apps built with react",
   "homepage": "https://github.com/memoye/credo-labs#readme",
   "bugs": {
@@ -19,18 +19,18 @@
       "import": "./dist/index.js"
     },
     "./ui/*": {
-      "types": "./dist/components/*/index.d.ts",
+      "types": "./dist/ui/*/index.d.ts",
       "import": "./dist/ui/*/index.js"
+    },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "import": "./dist/utils/index.js"
     },
     "./styles/entry.css": {
       "import": "./dist/styles/entry.css"
     },
     "./styles/palette.css": {
       "import": "./dist/styles/palette.css"
-    },
-    "./utils": {
-      "types": "./dist/utils/index.d.ts",
-      "import": "./dist/utils/index.js"
     }
   },
   "main": "dist/index.js",
@@ -57,8 +57,8 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "npm run storybook",
+    "build": "npm run prebuild && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
