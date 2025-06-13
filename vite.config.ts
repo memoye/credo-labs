@@ -33,8 +33,8 @@ export default defineConfig({
     }),
     tailwindcss(),
     dts({
-      entryRoot: "src",
-      rollupTypes: true,
+      // entryRoot: "src",
+      // rollupTypes: true,
       exclude: ["src/**/*.test.*", "src/**/*.stories.*", "**/*.svg"],
       beforeWriteFile: (filePath, content) => {
         if (filePath.includes("icons")) {
@@ -56,7 +56,8 @@ export default defineConfig({
     lib: {
       entry: {
         index: path.resolve(__dirname, "src/index.ts"),
-        "styles/entry.css": path.resolve(__dirname, "src/styles/tailwind.css"),
+        styles: path.resolve(__dirname, "src/styles/entry.css"),
+        palette: path.resolve(__dirname, "src/styles/palette.css"),
         "styles/palette.css": path.resolve(__dirname, "src/styles/palette.css"),
         "ui/button/index": path.resolve(__dirname, "src/ui/button/index.ts"),
         "ui/icons/index": path.resolve(__dirname, "src/ui/icons/index.ts"),

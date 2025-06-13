@@ -1,6 +1,6 @@
 {
   "name": "@credo-labs/react",
-  "version": "0.0.0-alpha.3",
+  "version": "0.0.0-alpha.0.2",
   "description": "UI components and utilities for Credo apps built with react",
   "homepage": "https://github.com/memoye/credo-labs#readme",
   "bugs": {
@@ -10,8 +10,11 @@
     "type": "git",
     "url": "git+https://github.com/memoye/credo-labs.git"
   },
-  "license": "ISC",
-  "author": "Brown Memoye",
+  "license": "MIT",
+  "author": "Credo Central",
+  "maintainers": [
+    "Brown Memoye <memoyebrown@gmail.com> (https://github.com/memoye)"
+  ],
   "type": "module",
   "exports": {
     ".": {
@@ -26,17 +29,14 @@
       "types": "./dist/utils/index.d.ts",
       "import": "./dist/utils/index.js"
     },
-    "./styles/entry.css": {
-      "import": "./dist/styles/entry.css"
-    },
-    "./styles/palette.css": {
-      "import": "./dist/styles/palette.css"
-    }
+    "./styles.css": "./dist/styles.css",
+    "./palette.css": "./dist/styles.css"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
+    "fonts",
     "src/assets/fonts"
   ],
   "publishConfig": {
@@ -57,7 +57,8 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "dev": "npm run storybook",
+    "dev": "vite",
+    "dev:docs": "npm run storybook",
     "build": "npm run prebuild && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -71,6 +72,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@credo-labs/react": "file:credo-labs-react-0.0.0-alpha.0.2.tgz",
     "@radix-ui/react-slot": "1.2.3",
     "@tailwindcss/vite": "^4.1.10",
     "class-variance-authority": "0.7.1",
