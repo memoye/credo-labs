@@ -1,6 +1,6 @@
 {
   "name": "@credo-labs/react",
-  "version": "0.0.0-alpha.0.2",
+  "version": "0.0.0-alpha.0.3",
   "description": "UI components and utilities for Credo apps built with react",
   "homepage": "https://github.com/memoye/credo-labs#readme",
   "bugs": {
