@@ -1,4 +1,4 @@
-# Credo UI (React)
+# ![Credo](./src/assets/icons/credo.svg) Credo UI (React)
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![pnpm](https://img.shields.io/badge/maintained%20with-npm-d50000.svg)](https://www.npmjs.com/package/@credo-labs/react)
