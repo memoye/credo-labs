@@ -122,7 +122,3 @@
   --white: oklch(1 0 0); /* #FFFFFF */
   --black: oklch(0 0 0); /* #000000 */
 }
-
-.dark {
-  /* Add dark mode variables here */
-}

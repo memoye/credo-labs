@@ -1,9 +1,18 @@
-# Credo Labs (React)
+# Credo UI (React)
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![pnpm](https://img.shields.io/badge/maintained%20with-npm-d50000.svg)](https://www.npmjs.com/package/@credo-labs/react)
 
 A modern React component library built with Tailwind CSS v4 and radix-ui primitives, providing a comprehensive set of UI components, design tokens and utilities for building consistent user interfaces.
+
+## Features
+
+- 🎨 **Design System**: Comprehensive color palette
+- 📦 **Tree-shakable**: Optimized bundle size with granular imports
+- 🎨 **Tailwind v4**: Modern styling with CSS custom properties
+- 🎯 **Accessible**: Built with accessibility best practices
+- 📱 **Responsive**: Mobile-first design approach
+- ⚡ **Performance**: Optimized for modern React applications
 
 ## Installation
 
@@ -13,351 +22,233 @@ npm install @credo-labs/react
 
 ## Quick Start
 
-### 1. Install the Library
+### 1. Import Styles
 
-```bash
-npm i @credo-labs/react
+Import the library styles in your root CSS file (recommended):
+
+```css
+/* src/index.css or src/globals.css */
+@import "@credo-labs/react/styles.css";
+@import "tailwindcss";
 ```
 
-### 2. Import Styles
-
-You have several options for importing the library's styles depending on your setup:
-
-#### Option A: Import to Root Component (Recommended)
-
-Import the styles directly in your root TSX/JSX file:
+Alternatively, you can import in your root JavaScript/TypeScript file:
 
 ```tsx
-// In your App.tsx or main.tsx
-import "@credo-labs/react/style.css";
-
-function App() {
-  return <div className="App">{/* Your app content */}</div>;
-}
+// src/main.tsx or src/index.tsx
+import "@credo-labs/react/styles.css";
 ```
 
-#### Option B: Import to CSS File
-
-If you're using Tailwind CSS, add the import to your main CSS file:
-
-```css
-/* In your main.css or index.css */
-
-/* For customization - import BEFORE Tailwind */
-@import "@credo-labs/react/style.css";
-@import "tailwindcss";
-
-/* Then add your custom variables */
-:root {
-  --radius: 12px; /* Override default radius */
-  --primary-500: oklch(0.6 0.2 280); /* Custom brand color */
-  /* Add other custom variables here */
-}
-```
-
-**OR**
-
-```css
-/* To use library defaults - import AFTER Tailwind */
-@import "tailwindcss";
-@import "@credo-labs/react/style.css";
-```
-
-#### Option C: Palette Only
-
-If you only need the color palette without other styling:
-
-```css
-@import "@credo-labs/react/palette.css";
-```
-
-### 3. Font Configuration (Optional)
-
-The library uses **Outfit** as the default sans-serif font. If your project's styles are overriding the library fonts but you want to use Outfit, add this to your Tailwind theme configuration:
-
-```css
-@theme inline {
-  --font-sans: Outfit, ui-sans-serif, system-ui, sans-serif;
-}
-```
-
-> **Note**: This is only needed if you're experiencing font conflicts and want to ensure the library's Outfit font is used.
-
-## Usage
-
-### Component Imports
-
-#### Recommended Approach (Better Tree-Shaking)
-
-Import components individually for optimal bundle size:
+### 2. Use Components
 
 ```tsx
 import { Button } from "@credo-labs/react/ui/button";
-import { Card } from "@credo-labs/react/ui/card";
-import { Input } from "@credo-labs/react/ui/input";
-
-function MyComponent() {
-  return (
-    <Card>
-      <Input placeholder="Enter text" />
-      <Button>Submit</Button>
-    </Card>
-  );
-}
-```
-
-#### Alternative Approach
-
-Import from the main package (less optimal for tree-shaking):
-
-```tsx
-import { Button, Card, Input } from "@credo-labs/react";
-
-function MyComponent() {
-  return (
-    <Card>
-      <Input placeholder="Enter text" />
-      <Button>Submit</Button>
-    </Card>
-  );
-}
-```
-
-### Icon Imports
-
-Icons are always imported from the icons path:
-
-```tsx
 import { CredoLogo } from "@credo-labs/react/ui/icons";
 
-function Header() {
+function App() {
   return (
     <div>
-      <CredoLogo />
-      <h1>My App</h1>
+      <CredoLogo className="w-8 h-8" />
+      <Button variant="primary">Get Started</Button>
     </div>
   );
 }
 ```
 
-## Styling Architecture
+## Import Methods
 
-### Design Tokens
+### Recommended: Granular Imports (Better Tree-shaking)
 
-The library provides a comprehensive set of design tokens including:
+```tsx
+// Components
+import { Button } from "@credo-labs/react/ui/button";
+import { Input } from "@credo-labs/react/ui/input";
+import { Card } from "@credo-labs/react/ui/card";
 
-- **Colors**: Semantic color palette with CSS custom properties
-- **Border Radius**: Consistent radius sizes for UI elements
-- **Typography**: Font families, sizes, and weights
-- **Spacing**: Standardized spacing scale
+// Icons
+import { CredoLogo, ArrowRight, Check } from "@credo-labs/react/ui/icons";
+```
 
-### Tailwind CSS v4 Integration
+### Alternative: Barrel Imports
 
-This library is built with Tailwind CSS v4 and provides:
+```tsx
+// Components (less optimal for tree-shaking)
+import { Button, Input, Card } from "@credo-labs/react";
 
-- CSS custom properties for easy theming
-- Consistent design system tokens
-- Full compatibility with your existing Tailwind setup
+// Icons (always use specific path)
+import { CredoLogo, ArrowRight, Check } from "@credo-labs/react/ui/icons";
+```
 
-### Customization
+## Theming & Customization
 
-The library exposes a comprehensive set of CSS custom properties that you can override to customize the design system:
+The library uses CSS custom properties for theming. You can override the default theme by setting CSS variables in your root styles.
 
-#### Available Customizable Variables
-
-**Border Radius**
+### Default Theme Structure
 
 ```css
 :root {
-  --radius: 8px; /* Base radius (default: 8px) */
-  /* Computed values: sm(4px), md(6px), lg(10px), xl(12px) */
-}
-```
+  /* Radius System */
+  --radius: 8px; /* Base radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
 
-**Typography**
-
-```css
-@theme inline {
+  /* Typography */
   --font-sans: Outfit, ui-sans-serif, system-ui, sans-serif;
   --tracking-normal: -2%;
-  --text-display-xs: 1.5rem;
-  --text-display-sm: 1.875rem;
-  --text-display: 2.25rem;
-  --text-display-lg: 3rem;
-  --text-display-xl: 3.75rem;
-  --text-display-2xl: 4.5rem;
+
+  /* Colors - Override these to customize your theme */
+  --primary-500: var(--orange-700); /* Default brand color */
 }
 ```
 
-**Color Palette**
-The library uses OKLCH color format for better color consistency. You can override any color:
+### Custom Theme Example
 
 ```css
+/* Override in your CSS file */
 :root {
-  /* Primary/Brand Colors */
-  --primary-25: oklch(0.9604 0.0186 265.98);
-  --primary-50: oklch(0.8967 0.0483 266.02);
-  --primary-400: oklch(0.5622 0.2414 261.24); /* Main brand color */
-  --primary-500: oklch(0.4546 0.2168 262.9);
-  /* ... and so on for all primary shades */
+  /* Change primary brand color to blue */
+  --primary-500: #3b82f6;
 
-  /* Gray Scale */
-  --gray-50: oklch(0.9846 0.0017 247.84);
-  --gray-100: oklch(0.9665 0.0045 258.32);
-  --gray-500: oklch(0.5444 0.035 265.11);
-  --gray-900: oklch(0.2099 0.0341 263.44);
-
-  /* Semantic Colors */
-  --success-500: oklch(0.6859 0.1667 154.86);
-  --warning-500: oklch(0.7469 0.1701 62.11);
-  --error-500: oklch(0.6371 0.2104 28.54);
-
-  /* Secondary Colors */
-  --purple-500: oklch(0.589 0.2241 286.64);
-  --pink-500: oklch(0.6707 0.2337 342.29);
-  --orange-500: oklch(0.6889 0.1995 42.49);
-  /* ... and more */
-}
-```
-
-#### How to Customize
-
-**Method 1: Import Before Tailwind (Recommended for customization)**
-
-```css
-/* In your main CSS file */
-@import "@credo-labs/react/style.css";
-@import "tailwindcss";
-
-/* Override variables after imports */
-@theme inline {
+  /* Customize radius system */
   --radius: 12px;
-  --primary-500: oklch(0.6 0.2 280); /* Custom blue */
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Use different font */
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
 }
 ```
 
-**Method 2: Using CSS Custom Properties**
+## Color System
 
-```css
-/* Create a separate customization file */
-/* custom-theme.css */
-:root {
-  --primary-400: oklch(0.65 0.25 340); /* Custom pink brand */
-  --success-500: oklch(0.7 0.18 160); /* Custom green */
-  --radius: 6px; /* Smaller radius */
-}
-```
+The library includes a comprehensive color palette:
 
-**Method 3: Runtime Customization**
+- **Gray**: 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900
+- **Brand/Primary**: 25, 50, 100, 200, 300, 400, 500, 600, 700, 900
+- **Success**: 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900
+- **Warning**: 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900
+- **Error**: 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900
+- **Blue Gray**: 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900
+- **Purple**: 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900
+- **Pink**: 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900
+- **Rose**: 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900
+- **Orange**: 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900
+
+### Using Colors in Components
 
 ```tsx
-// Dynamically change theme variables
-useEffect(() => {
-  document.documentElement.style.setProperty(
-    "--primary-500",
-    "oklch(0.6 0.2 120)"
-  );
-}, []);
+// Colors are available as Tailwind classes
+<div className="bg-brand-500 text-white">
+  <p className="text-gray-600">Secondary text</p>
+  <Button className="bg-success-500 hover:bg-success-600">
+    Success Action
+  </Button>
+</div>
 ```
 
-#### Color Format Information
+## Typography Scale
 
-The library uses **OKLCH** color format for:
+The library includes a comprehensive typography scale:
 
-- Better perceptual uniformity
-- Consistent lightness across hues
-- Future-proof color specification
+```css
+/* Display text sizes */
+--text-display-xs: 1.5rem (24px)
+--text-display-sm: 1.875rem (30px)
+--text-display: 2.25rem (36px)
+--text-display-lg: 3rem (48px)
+--text-display-xl: 3.75rem (60px)
+--text-display-2xl: 4.5rem (72px)
+```
 
-You can convert colors to OKLCH at [oklch.com](https://oklch.com) or use tools like:
+## Component Examples
 
-- CSS `color()` function for fallbacks
-- PostCSS plugins for automatic conversion
+### Button Variants
 
-## Setup Examples
-
-<!-- ### Next.js Setup -->
-
-<!-- ```tsx
-// pages/_app.tsx or app/layout.tsx
-import "@credo-labs/react/style.css";
+```tsx
 import { Button } from "@credo-labs/react/ui/button";
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
-}
-``` -->
-
-### Vite Setup
-
-```tsx
-// src/main.tsx
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "@credo-labs/react/style.css";
-import App from "./App.tsx";
-
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button size="sm">Small</Button>
+<Button size="lg">Large</Button>
+<Button disabled>Disabled</Button>
 ```
 
-### Create React App Setup
+### Using Icons
 
 ```tsx
-// src/index.tsx
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "@credo-labs/react/style.css";
-import App from "./App";
+import { CredoLogo, ArrowRight, Check } from "@credo-labs/react/ui/icons";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+<div className="flex items-center gap-2">
+  <CredoLogo className="w-6 h-6" />
+  <span>Credo Labs</span>
+  <ArrowRight className="w-4 h-4" />
+</div>
+
+<Button>
+  <Check className="w-4 h-4 mr-2" />
+  Confirmed
+</Button>
 ```
 
 ## Best Practices
 
-1. **Use individual imports** for better tree-shaking and smaller bundle sizes
-2. **Import styles at the root level** to ensure they're available throughout your app
-3. **Check for font conflicts** if you notice typography issues
-4. **Use semantic color tokens** provided by the library for consistent theming
-5. **Test your setup** with a simple component to ensure styles are loading correctly
+### Performance Optimization
 
-## Troubleshooting
+1. **Use granular imports** for better tree-shaking:
 
-### Styles Not Loading
+   ```tsx
+   // ✅ Good
+   import { Button } from "@credo-labs/react/ui/button";
 
-- Ensure you've imported the CSS file in your root component or main CSS file
-- Check that the import path is correct: `@credo-labs/react/style.css`
+   // ❌ Less optimal
+   import { Button } from "@credo-labs/react";
+   ```
 
-### Font Issues
+2. **Import styles once** in your application root
 
-- Add the font configuration to your Tailwind theme if experiencing conflicts
-- The library includes Outfit font - ensure it's not being overridden by your styles
+### Accessibility
 
-### Customization Not Working
+- All components follow WCAG 2.1 guidelines
+- Keyboard navigation is supported across all interactive components
+- Screen reader compatibility is built-in
+- Focus management is handled automatically
 
-- Make sure to import library styles **before** `@import "tailwindcss"` for customization
-- Use the exact CSS custom property names from the documentation
-- Check browser dev tools to verify your custom properties are being applied
+### Styling
 
-### Color Issues
+- Use Tailwind utility classes for custom styling
+- Leverage CSS custom properties for consistent theming
+- Follow the established color and spacing system
 
-- The library uses OKLCH color format - ensure your custom colors use the same format
-- Use [oklch.com](https://oklch.com) to convert hex/rgb colors to OKLCH
+### Prerequisites
 
-### Tailwind Prefix Conflicts
+- Node.js 16+
+- React 18+
+- Tailwind CSS v4
 
-- The library uses `cr:` prefix for Tailwind classes to avoid conflicts
-- If you see styling issues, check for class name conflicts with your existing Tailwind setup
+## Browser Support
 
-### Import Errors
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
-- Use the full path for component imports: `@credo-labs/react/ui/button`
-- Icons must be imported from: `@credo-labs/react/ui/icons`
+## Contributing
+
+We welcome contributions! Please see our contributing guidelines for more details.
+
+## License
+
+MIT License - see LICENSE file for details.
 
 ## Support
 
-For issues, feature requests, or questions, please refer to the project's issue tracker or documentation.
+- 📚 [Documentation](https://storybook.credo-labs.com)
+- 🐛 [Issue Tracker](https://github.com/credogit)
+- 💬 [Discussions](https://github.com/credogit)
+
+---
+
+Built with ❤️ by [Credocentral](https://credocentral.com)
