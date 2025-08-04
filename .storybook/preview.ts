@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/react-vite";
 import "../src/styles/entry.css";
+import theme from "./theme";
 
 const preview: Preview = {
   parameters: {
@@ -15,6 +16,18 @@ const preview: Preview = {
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
       test: "todo",
+    },
+    docs: { theme },
+    options: {
+      storySort: {
+        order: [
+          "Introduction",
+          ["Getting Started", "Design Tokens", "Theming"], // Sub-sections under Introduction
+          "Components",
+          // ["Form", "Layout", "Navigation", "Feedback"], // Sub-sections under Components
+          "*", // Everything else
+        ],
+      },
     },
   },
 };

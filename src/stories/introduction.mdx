@@ -1,1 +1,391 @@
-# Introduction
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Introduction/Getting Started" />
+
+# Credo React Component Library
+
+Welcome to the **Credo React Component Library** documentation! This comprehensive design system provides accessible, themeable, and performant React components built with Tailwind CSS v4.
+
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+npm install @credo-labs/react
+```
+
+### Setup
+
+Import the library styles in your application:
+
+```css
+/* In your main CSS file */
+@import "@credo-labs/react/styles.css";
+@import "tailwindcss";
+```
+
+### Basic Usage
+
+```tsx
+import { Button } from "@credo-labs/react/ui/button";
+import { CredoLogo } from "@credo-labs/react/ui/icons";
+
+function App() {
+  return (
+    <div className="p-6">
+      <div className="flex items-center gap-2 mb-4">
+        <CredoLogo className="w-8 h-8" />
+        <h1 className="text-display-sm font-bold text-gray-900">
+          Welcome to Credo
+        </h1>
+      </div>
+
+      <div className="flex gap-3">
+        <Button variant="primary">Get Started</Button>
+        <Button variant="outline">Learn More</Button>
+      </div>
+    </div>
+  );
+}
+```
+
+## 🎨 Design Principles
+
+### Accessibility First
+
+Every component is built with accessibility in mind, following WCAG 2.1 guidelines:
+
+- Semantic HTML structure
+- Keyboard navigation support
+- Screen reader compatibility
+- Proper focus management
+- High contrast ratios
+
+### Performance Optimized
+
+- **Tree-shakable**: Import only what you need
+- **Lightweight**: Minimal runtime overhead
+- **Modern**: Built for React 18+ and modern browsers
+
+### Customizable
+
+- **CSS Custom Properties**: Easy theme customization
+- **Tailwind Integration**: Use utility classes for styling
+- **Flexible APIs**: Comprehensive prop interfaces
+
+## 🎯 Component Categories
+
+### Form Components
+
+- **Button**: Primary actions, secondary actions, and icon buttons
+- **Input**: Text inputs, search fields, and form controls
+- **Select**: Dropdown selections and multi-select
+- **Checkbox**: Single and group selections
+- **Radio**: Exclusive selections
+- **Switch**: Toggle states
+
+### Layout Components
+
+- **Card**: Content containers with various styles
+- **Container**: Page and section wrappers
+- **Grid**: Responsive grid systems
+- **Stack**: Vertical and horizontal layouts
+
+### Navigation
+
+- **Menu**: Dropdown and context menus
+- **Tabs**: Content organization
+- **Breadcrumb**: Navigation hierarchy
+- **Pagination**: Content navigation
+
+### Feedback
+
+- **Alert**: Success, warning, error messages
+- **Toast**: Temporary notifications
+- **Modal**: Overlay dialogs
+- **Tooltip**: Contextual information
+
+### Data Display
+
+- **Table**: Data presentation
+- **Badge**: Status indicators
+- **Avatar**: User representations
+- **Progress**: Loading and completion states
+
+## 🎨 Design Tokens
+
+### Color System
+
+Our color system is built around semantic color naming with a comprehensive palette:
+
+```css
+/* Brand Colors */
+--color-brand-25: /* Very light brand */
+--color-brand-400: /* Primary brand color */
+--color-brand-600: /* Darker brand for hover states */
+
+/* Semantic Colors */
+--color-success-500: /* Success actions */
+--color-warning-500: /* Warning states */
+--color-error-500: /* Error states */
+
+/* Neutral Colors */
+--color-gray-50: /* Light backgrounds */
+--color-gray-500: /* Medium text */
+--color-gray-900: /* Dark text */
+```
+
+### Typography Scale
+
+```css
+/* Display Text */
+--text-display-xs: 1.5rem; /* 24px */
+--text-display-sm: 1.875rem; /* 30px */
+--text-display: 2.25rem; /* 36px */
+--text-display-lg: 3rem; /* 48px */
+--text-display-xl: 3.75rem; /* 60px */
+--text-display-2xl: 4.5rem; /* 72px */
+```
+
+### Spacing & Sizing
+
+```css
+/* Border Radius */
+--radius-sm: 4px;
+--radius-md: 6px;
+--radius: 8px; /* Base radius */
+--radius-lg: 10px;
+--radius-xl: 12px;
+```
+
+## 📋 Import Strategies
+
+### Recommended: Granular Imports
+
+For optimal bundle size and tree-shaking:
+
+```tsx
+// ✅ Best for performance
+import { Button } from "@credo-labs/react/ui/button";
+import { Card, CardHeader, CardContent } from "@credo-labs/react/ui/card";
+import { CredoLogo, ArrowRight } from "@credo-labs/react/ui/icons";
+```
+
+### Alternative: Barrel Imports
+
+For convenience (less optimal for tree-shaking):
+
+```tsx
+// ✅ Convenient but larger bundle
+import { Button, Card } from "@credo-labs/react";
+// Icons should always use specific imports
+import { CredoLogo } from "@credo-labs/react/ui/icons";
+```
+
+## 🎨 Theming Guide
+
+### Basic Theme Customization
+
+Override CSS custom properties to customize the theme:
+
+```css
+:root {
+  /* Primary brand color */
+  --primary-500: #3b82f6; /* Blue instead of orange */
+
+  /* Border radius */
+  --radius: 12px; /* More rounded */
+
+  /* Typography */
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+```
+
+### Advanced Theming
+
+Create multiple themes using CSS classes:
+
+```css
+/* Light theme (default) */
+.theme-light {
+  --color-background: #ffffff;
+  --color-foreground: #1f2937;
+}
+
+/* Dark theme */
+.theme-dark {
+  --color-background: #1f2937;
+  --color-foreground: #f9fafb;
+}
+
+/* Brand theme */
+.theme-brand {
+  --primary-500: #8b5cf6; /* Purple brand */
+  --color-background: #faf5ff;
+}
+```
+
+Apply themes dynamically:
+
+```tsx
+function App() {
+  const [theme, setTheme] = useState("light");
+
+  return <div className={`theme-${theme}`}>{/* Your app content */}</div>;
+}
+```
+
+## 🔧 Development Setup
+
+### For Library Contributors
+
+```bash
+# Clone the repository
+git clone https://github.com/credo-labs/react.git
+cd react
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Run tests
+npm test
+
+# Build library
+npm run build
+
+# Start Storybook
+npm run storybook
+```
+
+### Integration with Existing Projects
+
+```tsx
+// tailwind.config.js
+module.exports = {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@credo-labs/react/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      // Your custom theme extensions
+    },
+  },
+  plugins: [],
+};
+```
+
+## 📚 Component Usage Patterns
+
+### Composition Patterns
+
+```tsx
+// Card composition
+<Card className="max-w-md">
+  <CardHeader>
+    <CardTitle>Settings</CardTitle>
+    <CardDescription>Manage your account preferences</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <form className="space-y-4">
+      <Input label="Email" type="email" required />
+      <Button type="submit" className="w-full">
+        Save Changes
+      </Button>
+    </form>
+  </CardContent>
+</Card>
+
+// Button with icons
+<Button variant="primary" size="lg">
+  <ArrowRight className="w-4 h-4 mr-2" />
+  Continue
+</Button>
+```
+
+### Form Patterns
+
+```tsx
+// Form with validation states
+<div className="space-y-4">
+  <Input
+    label="Email"
+    type="email"
+    error="Please enter a valid email"
+    required
+  />
+  <Input
+    label="Password"
+    type="password"
+    success="Password is strong"
+    required
+  />
+  <Button type="submit" disabled={!isValid}>
+    Create Account
+  </Button>
+</div>
+```
+
+## 🎯 Best Practices
+
+### Performance
+
+- Use granular imports for better tree-shaking
+- Import styles only once in your application root
+- Leverage React.memo for expensive components
+
+### Accessibility
+
+- Always provide meaningful labels for form inputs
+- Use semantic HTML elements
+- Test with keyboard navigation
+- Verify screen reader compatibility
+
+### Styling
+
+- Use Tailwind utilities for customization
+- Follow the established design token system
+- Avoid overriding component internals
+- Prefer theme customization over component-specific styles
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Styles not loading:**
+
+```tsx
+// ✅ Ensure styles are imported
+import "@credo-labs/react/styles.css";
+```
+
+**TypeScript errors:**
+
+```bash
+# Install type definitions
+npm install --save-dev @types/react @types/react-dom
+```
+
+**Bundle size too large:**
+
+```tsx
+// ✅ Use granular imports
+import { Button } from "@credo-labs/react/ui/button";
+
+// ❌ Avoid barrel imports for better tree-shaking
+import { Button } from "@credo-labs/react";
+```
+
+## 📞 Support
+
+- 📖 **Documentation**: Browse component stories and examples
+- 🐛 **Issues**: [GitHub Issues](https://github.com/credo-labs/react/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/credo-labs/react/discussions)
+- 📧 **Email**: support@credo-labs.com
+
+---
+
+Ready to build amazing user interfaces? Explore the component library and start creating! 🚀
